@@ -1,0 +1,200 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-ink-950: #04060b;
+  --color-ink-900: #070a12;
+  --color-ink-800: #0c111d;
+  --color-ink-700: #131a2a;
+  --color-ink-600: #1d2639;
+  --color-line: rgba(148, 163, 184, 0.12);
+
+  --color-neon: #22d3ee;
+  --color-neon-2: #a855f7;
+  --color-acid: #4ade80;
+
+  --color-sev-critical: #ff3b6b;
+  --color-sev-high: #ff8a3d;
+  --color-sev-medium: #fbbf24;
+  --color-sev-low: #38bdf8;
+  --color-sev-info: #94a3b8;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  background: var(--color-ink-950);
+  color: #e2e8f0;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(34, 211, 238, 0.35);
+  color: white;
+}
+
+/* ---------- Background --------------------------------------------------- */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(34, 211, 238, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.07) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 75%);
+  animation: grid-drift 24s linear infinite;
+}
+@keyframes grid-drift {
+  to {
+    background-position: 0 56px, 56px 0;
+  }
+}
+
+.noise::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  z-index: 60;
+}
+
+/* ---------- Surfaces ----------------------------------------------------- */
+.glass {
+  background: linear-gradient(180deg, rgba(19, 26, 42, 0.72), rgba(10, 14, 24, 0.72));
+  border: 1px solid var(--color-line);
+  backdrop-filter: blur(14px);
+}
+.glow-border {
+  position: relative;
+}
+.glow-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(120deg, rgba(34, 211, 238, 0.7), rgba(168, 85, 247, 0.5), rgba(34, 211, 238, 0.05) 60%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.text-gradient {
+  background: linear-gradient(100deg, #e0f2fe 0%, #22d3ee 35%, #a855f7 75%, #f0abfc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.shimmer {
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.18) 50%, transparent 70%);
+  background-size: 250% 100%;
+  animation: shimmer 2.6s ease-in-out infinite;
+}
+@keyframes shimmer {
+  from {
+    background-position: 150% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
+
+/* ---------- Radar -------------------------------------------------------- */
+.radar-sweep {
+  background: conic-gradient(from 0deg, rgba(34, 211, 238, 0.55), rgba(34, 211, 238, 0.12) 12%, transparent 30%);
+  animation: spin 3.2s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.blip {
+  animation: blip 2.4s ease-out infinite;
+}
+@keyframes blip {
+  0% {
+    transform: scale(0.4);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+.scanline {
+  background: linear-gradient(180deg, transparent, rgba(34, 211, 238, 0.12), transparent);
+  animation: scan 3s ease-in-out infinite;
+}
+@keyframes scan {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(400%);
+  }
+}
+
+.caret::after {
+  content: "▋";
+  margin-left: 2px;
+  color: var(--color-neon);
+  animation: caret 1s steps(1) infinite;
+}
+@keyframes caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ---------- Scrollbars --------------------------------------------------- */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #243049 transparent;
+}
+
+/* ---------- Print (PDF export) ------------------------------------------- */
+@media print {
+  html,
+  body {
+    background: white !important;
+    color: #0f172a !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .glass {
+    background: white !important;
+    border-color: #cbd5e1 !important;
+    backdrop-filter: none !important;
+  }
+  .text-gradient {
+    color: #0e7490 !important;
+    background: none !important;
+  }
+  .print-break {
+    break-inside: avoid;
+  }
+  * {
+    color: #0f172a !important;
+    box-shadow: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
