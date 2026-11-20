@@ -132,7 +132,9 @@ Grades: A+ ≥ 95 · A ≥ 85 · B ≥ 75 · C ≥ 65 · D ≥ 50 · F < 50.
 
 ## ☁️ Deploy
 
-The repo ships a `Dockerfile` and a `render.yaml` blueprint. On [Render](https://render.com): **New → Blueprint →** pick this repo. Any Docker host also works (Railway, Fly.io, a VPS).
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/ALLaNRoY-TECH/VulnSight)
+
+The repo ships a `Dockerfile` and a `render.yaml` blueprint. On [Render](https://render.com), click the button above or go to **New → Blueprint →** and pick this repo. The free plan works; scan history is kept in SQLite on the container and resets when the instance restarts. Any Docker host also works (Railway, Fly.io, a VPS).
 > Port scanning needs outbound TCP, so serverless platforms that only allow HTTP egress (for example Vercel functions) can't run the ports module.
 
 ## 🧪 Tests
