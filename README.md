@@ -13,6 +13,9 @@
 ![Tailwind](https://img.shields.io/badge/Tailwind-v4-06B6D4?logo=tailwindcss&logoColor=white)
 ![CI](https://github.com/ALLaNRoY-TECH/VulnSight/actions/workflows/ci.yml/badge.svg)
 
+### 🌐 [Live demo → vulnsight-08ol.onrender.com](https://vulnsight-08ol.onrender.com)
+<sub>Hosted on Render's free tier, so the first load after it has been idle can take up to a minute.</sub>
+
 <img src="docs/home.png" alt="VulnSight scanner home" width="100%" />
 
 </div>
